@@ -1,0 +1,10 @@
+/* module.wxss */
+.container{
+  margin-top: 200rpx;
+  display: flex;
+  flex-direction: row;
+}
+.module{
+  flex:1 1 auto;
+  text-align: center
+}

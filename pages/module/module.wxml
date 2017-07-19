@@ -1,0 +1,6 @@
+<!--module.wxml-->
+<view class="container">
+    <view class="module" wx:for="{{moduleList}}">
+        {{item}}
+    </view>
+</view>
