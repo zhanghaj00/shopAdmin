@@ -1,42 +1,18 @@
-// module.js
+// modulelist.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      moduleList:[]
+  
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      var that = this
-      username = wx.getStorage({
-        key: 'username',
-        success: function(res) {
-          console.log(res)
-
-          wx.request({
-            url: 'http://localhost:8000/usermodule',
-            data:{
-              username:res.data
-            },
-            method:'GET',
-            success:function(res){
-                that.setData({
-                  moduleList:res.data
-                })
-            }
-          })
-
-
-        },
-      })
-
-
-     
+  
   },
 
   /**
@@ -86,13 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-
-  intoItem:function(e){
-    var moduleid = e.currentTarget.moduleid;
-    //发送请求 跳转新的页面
-    wx.navigateTo({
-      url: '../modeledetail/modules?moduleid='+moduleid
-    })
   }
 })

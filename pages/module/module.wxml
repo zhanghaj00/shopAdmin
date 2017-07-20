@@ -1,6 +1,6 @@
 <!--module.wxml-->
 <view class="container">
     <view class="module" wx:for="{{moduleList}}">
-        {{item}}
+        <button bindtap="intoItem" moduleid="{{item.moduleid}}">{{item}}</button>
     </view>
 </view>
