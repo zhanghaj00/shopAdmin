@@ -1,2 +1,17 @@
 <!--modulelist.wxml-->
-<text>modulelist.wxml</text>
+<view class="md_list_header">{{moduleName}}-商品列表
+  <view class="md_list_header_right">
+    <view hover-start-time="50" bindtap="addPd"  data-modulename="{{moduleName}}">添加</view>
+  </view>
+</view>
+<scroll-view scroll-x class="md_list_container" style="width:auto">
+  <view class="md_list_item" wx:for="{{moduleDetailList}}" wx:key="item">
+      <view class="md_list_container_item">
+        <view class="md_list_pic"><image src="{{item.pdPic}}"></image></view>
+         <view class="md_list_container_item_1">
+            <view class="md_list_item_name">{{item.pdName}}</view>
+            <view class="md_list_item_price">价格：￥{{item.pdPrice}}</view>
+         </view>
+      </view>
+  </view>
+</scroll-view>

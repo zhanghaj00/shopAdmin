@@ -4,8 +4,7 @@
     "pages/logs/logs",
     "pages/module/module",
     "pages/moduledetail/modules/modulelist",
-    "pages/moduledetail/modules/modulelist",
-    "pages/moduledetail/modules/modulelist"
+    "pages/moduledetail/moduleadd/moduleadd"
   ],
   "window": {
     "backgroundTextStyle": "light",

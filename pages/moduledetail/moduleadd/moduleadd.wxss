@@ -1,0 +1,25 @@
+/* moduleadd.wxss */
+.mdheader{
+  margin-left: 20rpx;
+}
+.md_add_container{
+  display: flex;
+  flex-direction: column;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 20rpx
+}
+.md_add_item{
+  margin: 30rpx;
+  border-color: black;
+  height: 50px;
+  padding: 5rpx;
+  border: 2px solid black;
+
+}.md_add_input{
+  border-color: 2px solid black
+
+}
+.md_add_submit{
+  margin-bottom: 30rpx;
+}

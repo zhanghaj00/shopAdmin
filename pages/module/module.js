@@ -13,30 +13,26 @@ Page({
    */
   onLoad: function (options) {
       var that = this
-      username = wx.getStorage({
-        key: 'username',
+      wx.getStorage({
+        key: 'appId',
         success: function(res) {
           console.log(res)
 
           wx.request({
-            url: 'http://localhost:8000/usermodule',
-            data:{
-              username:res.data
-            },
+            url: 'http://localhost:8089/wxservice/api/v1/wx/queryPdInfoModule?apiName=WX_PD_QUERY_GROUP_MODULE&code=2',
             method:'GET',
             success:function(res){
+              console.log("module:"+res.data.errorCode)
+              console.log("module:" + res.data.data.pdInfos)
+              if (0 == res.data.errorCode){
                 that.setData({
-                  moduleList:res.data
+                  moduleList: res.data.data.pdInfos
                 })
+              }
             }
           })
-
-
         },
-      })
-
-
-     
+      }) 
   },
 
   /**
@@ -89,10 +85,11 @@ Page({
   },
 
   intoItem:function(e){
-    var moduleid = e.currentTarget.moduleid;
+    var moduleid = e.currentTarget.dataset.moduleid;
+    var moduleName = e.currentTarget.dataset.modulename;
     //发送请求 跳转新的页面
     wx.navigateTo({
-      url: '../modeledetail/modules?moduleid='+moduleid
+      url: '../moduledetail/modules/modulelist?moduleId='+moduleid +"&moduleName="+moduleName
     })
   }
 })

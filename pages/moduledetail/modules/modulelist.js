@@ -5,14 +5,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    moduleDetailList:[],
+    moduleName:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var that = this;
+     console.log(options.query)
+     var moduleId = options.moduleId;
+     var moduleName = options.moduleName;
+     that.setData({
+       moduleName:moduleName
+     })
+     username = wx.getStorage({
+       key: 'appId',
+       success: function (res) {
+         console.log(res)
+         wx.request({
+           url: 'http://localhost:8089/wxservice/api/v1/wx/queryPdInfo?apiName=WX_PD_QUERY&code=2&moduleId=' + moduleId,
+           method: 'GET',
+           success: function (res) {
+             console.log("module:" + res.data.data.pdInfos)
+             if (0 == res.data.errorCode) {
+               that.setData({
+                 moduleDetailList: res.data.data.pdInfos
+               })
+             }
+           }
+         })
+       },
+     }) 
   },
 
   /**
@@ -62,5 +87,11 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  addPd:function(e){
+    var moduleName = e.target.modulename;
+    wx.navigateTo({
+      url: '../moduleadd/moduleadd?moduleName=模块',
+    })
   }
 })
