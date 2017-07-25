@@ -9,19 +9,25 @@
         <text>商品价格:</text><input  class="md_add_input" type="digit" name="pdPrice" />
     </view>
     <view class="md_add_item">
-        <text>库存数量:</text><input  class="md_add_input" type="number" name="pdStore" />
+        <text>库存数量:</text><input  class="md_add_input" type="number" value="{{pdStore}}" name="pdStore" />
     </view>
     <view class="md_add_item">
-        <text>上传图片:</text><input  class="md_add_input" type="text" value="{{imgUrl}}"  name="pdPic" /><button bindtap="uploadImg"></button>
+        <text>上传主图片:</text><view bindtap="uploadImg" hover-start-time="50" class="md_upload_pic_view"  >上传</view><input  class="md_add_input" type="text" value="{{pdPic}}" name="pdPic" readonly='true' name="pdPic" />
+    </view>
+     <view class="md_add_item">
+        <text>上传详情图片:</text> <view bindtap="batchUploadImg"  class="md_upload_pic_view" hover-start-time="50">上传</view><input  class="md_add_input" type="text" name="pdPicMore" value="{{chooseImgs}}"  name="pdPic" />   
     </view>
     <view class="md_add_item">
         <text>视频地址:</text><input  class="md_add_input" type="text" name="pdVideo" />
     </view>
+
      <view class="md_add_item" style="height:auto">
         <text>商品描述:</text><textarea  class="md_add_input" name="pdDesc" style="height:250rpx" /> 
     </view>
      <view class="md_add_item " style="display:none">
-        <input name="appId" value="{{appid}}" /> 
+        <input name="code" value="2" /> 
+        <input name="moduleId" value="{{moduleId}}" /> 
+        <input name="moduleName" value="{{moduleName}}" /> 
     </view>
     <button formType="submit" class="md_add_submit">提交</button> 
   </form>

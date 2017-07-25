@@ -6,7 +6,8 @@ Page({
    */
   data: {
     moduleDetailList:[],
-    moduleName:''
+    moduleName:'',
+    moduleId:''
   },
 
   /**
@@ -18,9 +19,10 @@ Page({
      var moduleId = options.moduleId;
      var moduleName = options.moduleName;
      that.setData({
-       moduleName:moduleName
+       moduleName:moduleName,
+       moduleId:moduleId
      })
-     username = wx.getStorage({
+    wx.getStorage({
        key: 'appId',
        success: function (res) {
          console.log(res)
@@ -89,9 +91,10 @@ Page({
   
   },
   addPd:function(e){
-    var moduleName = e.target.modulename;
+    var moduleName = this.data.moduleName;
+    var moduleId =this.data.moduleId;
     wx.navigateTo({
-      url: '../moduleadd/moduleadd?moduleName=模块',
+      url: '../moduleadd/moduleadd?moduleName='+moduleName+"&moduleId="+moduleId,
     })
   }
 })

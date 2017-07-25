@@ -1,22 +1,37 @@
 // moduleadd.js
+var util = require('./manyupload.js') 
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      moduleid:'',
-      moduleName:''
+      moduleId:'',
+      moduleName:'',
+      appId:'',
+      chooseImgs:[],
+      pdPic:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
       var moduleName = options.moduleName;
-      this.setData({
-        moduleName: moduleName
-      })
+      var moduleId = options.moduleId;
+      wx.getStorage({
+        key: 'appId',
+        success: function (res) {
+          console.log(res)
+          that.setData({
+            moduleName: moduleName,
+            moduleId: moduleId,
+            appId:res.data
+          })
+        },
+      }) 
+      
   },
 
   /**
@@ -67,20 +82,49 @@ Page({
   onShareAppMessage: function () {
   
   },
-  uploadImg:function(){
+  batchUploadImg:function(){
+    var that =this
+    wx.chooseImage({
+      count: 9 - that.data.chooseImgs.length,
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      success: function (res) {
+        wx.showLoading({
+          title: '上传中'
+        })
+        var tempFilePaths = res.tempFilePaths
+        util.uploadMany(tempFilePaths, function (obj) {
+
+          that.data.chooseImgs.push(obj.data.data.pdPic)
+          that.setData({
+            chooseImgs: that.data.chooseImgs
+          })
+          wx.hideLoading()
+        })
+
+      }
+    })
+  },
+ uploadImg: function () {
+    var that = this
     wx.chooseImage({
       success: function (res) {
         var tempFilePaths = res.tempFilePaths
+        wx.showLoading({
+          title: '上传中'
+        })
         wx.uploadFile({
-          url: 'http://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
+          url: 'http://localhost:8089/wxservice/api/v1/upload/image?apiName=UPLOAD_IMAGE', //仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
-          formData: {
-            'user': 'test'
-          },
           success: function (res) {
-            var data = res.data
-            //do something
+            var result = JSON.parse(res.data)
+            that.setData({
+              pdPic: result.data.pdPic
+            })
+            wx.hideLoading()
+          },
+          fail:function(res){
+
           }
         })
       }
@@ -90,7 +134,8 @@ Page({
     var that = this;
     var formData = e.detail.value;
     wx.request({
-      url: 'http://test.com:8080/test/socket.php?msg=2',
+      url: 'http://localhost:8089/wxservice/api/v1/wx/insertPdInfo?apiName=WX_PD_INSERT',
+      method:'POST',
       data: formData,
       header: {
         'Content-Type': 'application/json'

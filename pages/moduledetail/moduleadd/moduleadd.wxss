@@ -12,7 +12,7 @@
 .md_add_item{
   margin: 30rpx;
   border-color: black;
-  height: 50px;
+  height: auto;
   padding: 5rpx;
   border: 2px solid black;
 
@@ -22,4 +22,9 @@
 }
 .md_add_submit{
   margin-bottom: 30rpx;
+}
+.md_upload_pic_view{
+  margin-right: 30rpx;
+  background-color: burlywood;
+  float: right;
 }

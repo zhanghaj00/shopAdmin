@@ -1,7 +1,7 @@
 <!--module.wxml-->
 <view class="mdheader">模块管理</view>
 <view class="mdcontainer">
-    <view class="module" wx:for="{{moduleList}}" wx:for-item="item" bindtap="intoItem" data-moduleId="{{item.moduleId}}" data-moduleName= "{{item.moduleName}}" >
+    <view class="module" wx:for="{{moduleList}}" wx:for-item="item" bindtap="intoItem" data-moduleId="{{item.id}}" data-moduleName= "{{item.moduleName}}" >
         <button >{{item.moduleName}}</button>
     </view>
 </view>
